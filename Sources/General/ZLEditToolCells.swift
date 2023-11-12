@@ -80,8 +80,8 @@ class ZLEditToolCell: UICollectionViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: 0, y: bounds.height - 24, width: bounds.width, height: 24)
-        label.font = .systemFont(ofSize: 12)
+        label.frame = CGRect(x: 0, y: bounds.height - 20, width: bounds.width, height: 24)
+        label.font = .systemFont(ofSize: 10)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -96,19 +96,6 @@ class ZLEditToolCell: UICollectionViewCell {
         view.clipsToBounds = true
         return view
     }()
-    
-//    lazy var icon = UIImageView(frame: contentView.bounds)
-//    
-//    lazy var nameLabel: UILabel = {
-//        let label = UILabel()
-//        label.frame = CGRect(x: 0, y: bounds.height - 20, width: bounds.width, height: 20)
-//        label.font = .systemFont(ofSize: 12)
-//        label.textColor = .black
-//        label.textAlignment = .center
-//        label.adjustsFontSizeToFitWidth = true
-//        label.minimumScaleFactor = 0.5
-//        return label
-//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,7 +124,7 @@ class ZLDrawColorCell: UICollectionViewCell {
     lazy var bgWhiteView: UIView = {
         let view = UIView()
         if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemGray5
+            view.backgroundColor = .black.withAlphaComponent(0.8)
         } else {
             // Fallback on earlier versions
         }
@@ -178,8 +165,8 @@ class ZLDrawColorCell: UICollectionViewCell {
 class ZLFilterImageCell: UICollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: 0, y: bounds.height - 20, width: bounds.width, height: 20)
-        label.font = .systemFont(ofSize: 12)
+        label.frame = CGRect(x: 0, y: bounds.height - 30, width: bounds.width, height: 30)
+        label.font = .systemFont(ofSize: 10)
         label.textColor = .white
         label.textAlignment = .center
         label.layer.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
@@ -192,7 +179,7 @@ class ZLFilterImageCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let view = UIImageView()
-        view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.width)
+        view.frame = CGRect(x: 0, y: 6, width: bounds.width, height: bounds.width)
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view

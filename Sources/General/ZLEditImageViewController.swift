@@ -86,9 +86,9 @@ open class ZLEditImageViewController: UIViewController {
     
     public var drawColViewH: CGFloat = 50
     
-    public var filterColViewH: CGFloat = 80
+    public var filterColViewH: CGFloat = 74
     
-    public var adjustColViewH: CGFloat = 60
+    public var adjustColViewH: CGFloat = 54
     
     public var ashbinSize = CGSize(width: 160, height: 80)
     
@@ -122,7 +122,10 @@ open class ZLEditImageViewController: UIViewController {
     
     open lazy var topShadowView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightText
+        view.backgroundColor = .white //?
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = CGSize(width: -1, height: 1)
         
         return view
     }()
@@ -136,7 +139,10 @@ open class ZLEditImageViewController: UIViewController {
      
     open lazy var bottomShadowView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightText
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = CGSize(width: -1, height: 1)
         
         return view
     }()
@@ -490,6 +496,9 @@ open class ZLEditImageViewController: UIViewController {
         filterCollectionView?.layer.shadowColor = UIColor.gray.cgColor
         filterCollectionView?.layer.shadowOpacity = 0.3
         filterCollectionView?.layer.shadowOffset = CGSize(width: -1, height: 1)
+        filterCollectionView?.showsHorizontalScrollIndicator = false
+        
+        drawColorCollectionView?.showsHorizontalScrollIndicator = false
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -527,27 +536,28 @@ open class ZLEditImageViewController: UIViewController {
         mainScrollView.frame = view.bounds
         resetContainerViewFrame()
         
-        topShadowView.frame = CGRect(x: 0, y: 0, width: view.zl.width, height: 150)
+        topShadowView.frame = CGRect(x: 0, y: 0, width: view.zl.width, height: 144)
 //        topShadowLayer.frame = topShadowView.bounds
         cancelBtn.frame = CGRect(x: 30, y: insets.top + 10, width: 28, height: 28)
         
-        bottomShadowView.frame = CGRect(x: 0, y: view.zl.height - 150 - insets.bottom, width: view.zl.width, height: 150 + insets.bottom)
+        bottomShadowView.frame = CGRect(x: 0, y: view.zl.height - 110 - insets.bottom, width: view.zl.width, height: 110 + insets.bottom)
 //        bottomShadowLayer.frame = bottomShadowView.bounds
         
         cancelBtn.frame = CGRect(x: 20, y: 60, width: 30, height: 30)
+        doneBtn.frame = CGRect(x: view.zl.width - 20 - 30, y: 60, width: 30, height: 30)
+        
         redoBtn.frame = CGRect(x: view.zl.width - 15 - 30, y: 110, width: 30, height: 30)
         undoBtn.frame = CGRect(x: redoBtn.zl.left - 15 - 30, y: 110, width: 30, height: 30)
         
 //        let doneBtnH = ZLImageEditorLayout.bottomToolBtnH
 //        let doneBtnW = localLanguageTextValue(.editFinish).zl.boundingRect(font: ZLImageEditorLayout.bottomToolTitleFont, limitSize: CGSize(width: CGFloat.greatestFiniteMagnitude, height: doneBtnH)).width + 20
-        doneBtn.frame = CGRect(x: view.zl.width - 20 - 30, y: 60 - 2, width: 30, height: 30)
         
-        eraserBtn.frame = CGRect(x: 20, y: 30 + (drawColViewH - 36) / 2, width: 36, height: 36)
+        eraserBtn.frame = CGRect(x: 20, y: 12 + (drawColViewH - 36) / 2, width: 36, height: 36)
         eraserBtnBgBlurView.frame = eraserBtn.frame
-        eraserLineView.frame = CGRect(x: eraserBtn.zl.right + 11, y: eraserBtn.frame.midY - 10, width: 1, height: 20)
-        drawColorCollectionView?.frame = CGRect(x: eraserLineView.zl.right + 11, y: 30, width: view.zl.width - eraserLineView.zl.right - 31, height: drawColViewH)
+        eraserLineView.frame = CGRect(x: eraserBtn.zl.right + 16, y: eraserBtn.frame.midY - 14, width: 1, height: 26)
+        drawColorCollectionView?.frame = CGRect(x: eraserLineView.zl.right + 11, y: 10, width: view.zl.width - eraserLineView.zl.right - 31, height: drawColViewH)
         
-        adjustCollectionView?.frame = CGRect(x: 20, y: 20, width: view.zl.width - 40, height: adjustColViewH)
+        adjustCollectionView?.frame = CGRect(x: 4, y: 8, width: view.frame.width, height: adjustColViewH)
         if ZLImageEditorUIConfiguration.default().adjustSliderType == .vertical {
             adjustSlider?.frame = CGRect(x: view.zl.width - 60, y: view.zl.height / 2 - 100, width: 60, height: 200)
         } else {
@@ -561,7 +571,7 @@ open class ZLEditImageViewController: UIViewController {
             )
         }
         
-        filterCollectionView?.frame = CGRect(x: 0, y: -14, width: view.frame.width, height: filterColViewH + 20)
+        filterCollectionView?.frame = CGRect(x: 0, y: -4, width: view.frame.width, height: filterColViewH)
         
         ashbinView.frame = CGRect(
             x: (view.zl.width - ashbinSize.width) / 2,
@@ -576,7 +586,7 @@ open class ZLEditImageViewController: UIViewController {
             height: 25
         )
         
-        let toolY: CGFloat = 95
+        let toolY: CGFloat = 68
         
 //        let doneBtnH = ZLImageEditorLayout.bottomToolBtnH
 //        let doneBtnW = localLanguageTextValue(.editFinish).zl.boundingRect(font: ZLImageEditorLayout.bottomToolTitleFont, limitSize: CGSize(width: CGFloat.greatestFiniteMagnitude, height: doneBtnH)).width + 20
@@ -1095,9 +1105,9 @@ open class ZLEditImageViewController: UIViewController {
         var editModel: ZLEditImageModel?
         
         func callback() {
-            dismiss(animated: animateDismiss) {
-                self.editFinishBlock?(resImage, editModel)
-            }
+//            dismiss(animated: animateDismiss) {
+            self.editFinishBlock?(resImage, editModel)
+//            }
         }
         
         guard hasEdit else {

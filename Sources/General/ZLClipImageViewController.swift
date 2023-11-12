@@ -326,7 +326,7 @@ class ZLClipImageViewController: UIViewController {
         cancelBtn.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
         bottomToolView.addSubview(cancelBtn)
         
-        revertBtn.setTitleColor(.white, for: .normal)
+        revertBtn.setTitleColor(.black, for: .normal)
         revertBtn.setTitle(localLanguageTextValue(.revert), for: .normal)
         revertBtn.enlargeInset = 20
         revertBtn.titleLabel?.font = ZLImageEditorLayout.bottomToolTitleFont
