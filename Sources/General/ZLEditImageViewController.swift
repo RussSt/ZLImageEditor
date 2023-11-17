@@ -267,7 +267,7 @@ open class ZLEditImageViewController: UIViewController {
     
     var adjustSlider: ZLAdjustSlider?
     
-    var animateDismiss = true
+    var animateDismiss = false
     
     var originalImage: UIImage
     
@@ -1105,6 +1105,7 @@ open class ZLEditImageViewController: UIViewController {
         var editModel: ZLEditImageModel?
         
         func callback() {
+            navigationController?.popToRootViewController(animated: false)
             dismiss(animated: animateDismiss) {
                 self.editFinishBlock?(resImage, editModel)
             }
